@@ -14,7 +14,7 @@ class TF2 {
      * @param {String} options.apiKey Steam API key
      * @param {Number} options.updateTime
      */
-    constructor (options) {
+    constructor(options) {
         EventEmitter.call(this);
 
         this.apiKey = options.apiKey;
@@ -25,10 +25,17 @@ class TF2 {
     }
 
     /**
+     * @param {String} apiKey Steam API key
+     */
+    setAPIKey(apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    /**
      * Initializes the class
      * @param {Function} callback
      */
-    init (callback) {
+    init(callback) {
         if (this.ready) {
             callback(null);
             return;
@@ -43,7 +50,7 @@ class TF2 {
             return;
         }
 
-        this.getSchema((err) => {
+        this.getSchema(err => {
             if (err) {
                 return callback(err);
             }
@@ -61,9 +68,9 @@ class TF2 {
      * @param {Object} data Schema data
      * @param {Boolean} fromUpdate If the schema is new or not
      */
-    setSchema (data, fromUpdate) {
+    setSchema(data, fromUpdate) {
         // Ignore the schema if it does not contain a version, or if the schema has a higher version (major)
-        if ((!data.version && !fromUpdate) || semver.major(data.version) !== semver.major(version)) {
+        if ((!data.version && !fromUpdate) || semver.major(data.version) > semver.major(version)) {
             return;
         }
 
@@ -83,44 +90,47 @@ class TF2 {
      * Gets the schema from the TF2 API
      * @param {Function} callback
      */
-    getSchema (callback) {
+    getSchema(callback) {
         if (this.apiKey === undefined) {
             throw new Error('Missing API key');
         }
 
-        async.parallel({
-            overview: (callback) => {
-                Schema.getOverview(this.apiKey, callback);
+        async.parallel(
+            {
+                overview: callback => {
+                    Schema.getOverview(this.apiKey, callback);
+                },
+                items: callback => {
+                    Schema.getItems(this.apiKey, callback);
+                },
+                paintkits: function (callback) {
+                    Schema.getPaintKits(callback);
+                },
+                items_game: function (callback) {
+                    Schema.getItemsGame(callback);
+                }
             },
-            items: (callback) => {
-                Schema.getItems(this.apiKey, callback);
-            },
-            paintkits: function (callback) {
-                Schema.getPaintKits(callback);
-            },
-            items_game: function (callback) {
-                Schema.getItemsGame(callback);
+            (err, result) => {
+                if (err) {
+                    return callback(err);
+                }
+
+                const raw = {
+                    schema: Object.assign(result.overview, { items: result.items, paintkits: result.paintkits }),
+                    items_game: result.items_game
+                };
+
+                this.setSchema({ version: version, raw: raw }, true);
+
+                callback(null, this.schema);
             }
-        }, (err, result) => {
-            if (err) {
-                return callback(err);
-            }
-
-            const raw = {
-                schema: Object.assign(result.overview, { items: result.items, paintkits: result.paintkits }),
-                items_game: result.items_game
-            };
-
-            this.setSchema({ version: version, raw: raw }, true);
-
-            callback(null, this.schema);
-        });
+        );
     }
 
     /**
      * Starts schema updater
      */
-    _startUpdater () {
+    _startUpdater() {
         if (this.updateTime === -1) {
             return;
         }
@@ -130,16 +140,19 @@ class TF2 {
 
         this._updateTimeout = setTimeout(() => {
             // Update the schema
-            this.getSchema((err) => {
+            this.getSchema(err => {
                 this.emit('failed', err);
             });
 
             // Set update interval
-            this._updateInterval = setInterval(TF2.prototype.getSchema.bind(this, function () {}), this.updateTime);
+            this._updateInterval = setInterval(
+                TF2.prototype.getSchema.bind(this, function () {}),
+                this.updateTime
+            );
         }, this._updateWait());
     }
 
-    _updateWait () {
+    _updateWait() {
         if (this.updateTime === -1) {
             return -1;
         }

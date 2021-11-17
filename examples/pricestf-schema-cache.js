@@ -51,21 +51,24 @@ schemaManager.on('ready', function () {
 });
 
 // function that fetches the schema from the pricestf api
-function fetchSchema (callback) {
-    request({
-        method: 'GET',
-        url: 'https://api.prices.tf/schema',
-        qs: {
-            appid: 440
+function fetchSchema(callback) {
+    request(
+        {
+            method: 'GET',
+            url: 'https://api.prices.tf/schema',
+            qs: {
+                appid: 440
+            },
+            json: true,
+            gzip: true
         },
-        json: true,
-        gzip: true
-    }, function (err, response, body) {
-        if (err) {
-            return callback(err);
-        }
+        function (err, response, body) {
+            if (err) {
+                return callback(err);
+            }
 
-        delete body.success;
-        return callback(null, body);
-    });
+            delete body.success;
+            return callback(null, body);
+        }
+    );
 }
