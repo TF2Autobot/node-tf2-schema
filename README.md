@@ -1,6 +1,4 @@
-## Archived - Please use @tf2autobot/tf2-schema module
-
-# node-tf2-schema-2
+# @tf2autobot/tf2-schema
 
 # Minimum NodeJS version: v14.x
 
