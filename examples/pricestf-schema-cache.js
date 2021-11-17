@@ -1,5 +1,5 @@
-const Schema = require('tf2-schema');
-const request = require('@nicklason/request-retry');
+const Schema = require('@tf2autobot/tf2-schema');
+const request = require('request-retry-dayjs');
 const io = require('socket.io-client');
 
 // Disable the schema updater

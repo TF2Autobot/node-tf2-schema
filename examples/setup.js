@@ -1,4 +1,4 @@
-const Schema = require('tf2-schema');
+const Schema = require('@tf2autobot/tf2-schema');
 
 // Create new instance of tf2-schema
 const schemaManager = new Schema({ apiKey: 'your steam api key' });

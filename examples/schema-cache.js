@@ -1,4 +1,4 @@
-const Schema = require('tf2-schema');
+const Schema = require('@tf2autobot/tf2-schema');
 const fs = require('fs');
 
 const SCHEMA_PATH = './path-to-schema-file.json';
