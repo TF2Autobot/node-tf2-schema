@@ -1,5 +1,5 @@
 {
-  "name": "tf2-schema-2",
+  "name": "@tf2autobot/tf2-schema",
   "version": "2.2.0",
   "description": "Get information about TF2 items, effects, skins and more, originally made by Nicklason, modified by IdiNium.",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idinium96/node-tf2-schema-2.git"
+    "url": "git+https://github.com/TF2Autobot/node-tf2-schema.git"
   },
   "author": "Nicklas Marc Pedersen/IdiNium",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/idinium96/node-tf2-schema-2/issues"
+    "url": "https://github.com/TF2Autobot/node-tf2-schema/issues"
   },
-  "homepage": "https://github.com/idinium96/node-tf2-schema-2#readme",
+  "homepage": "https://github.com/TF2Autobot/node-tf2-schema#readme",
   "dependencies": {
     "async": "^3.2.1",
     "events": "^3.3.0",
