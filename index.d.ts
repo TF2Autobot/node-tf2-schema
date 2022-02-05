@@ -277,6 +277,10 @@ declare namespace SchemaManager {
 
         getUncraftableWeaponsForTrading(): string[];
 
+        checkExistance(item: Item): null | true;
+
+        updateCrateSeriesList(): void;
+
         toJSON(): { version: string; time: number; raw: Record<string, any> };
     }
 }
