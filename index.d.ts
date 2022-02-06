@@ -187,6 +187,10 @@ declare namespace SchemaManager {
         [name: string]: string;
     }
 
+    export interface CrateSeriesList {
+        [defindex: string]: number;
+    }
+
     export type CharacterClasses =
         | 'Scout'
         | 'Soldier'
@@ -278,6 +282,8 @@ declare namespace SchemaManager {
         getUncraftableWeaponsForTrading(): string[];
 
         checkExistance(item: Item): null | true;
+
+        getCrateSeriesList(): CrateSeriesList;
 
         updateCrateSeriesList(): void;
 
