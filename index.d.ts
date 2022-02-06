@@ -231,6 +231,8 @@ declare namespace SchemaManager {
 
         time: number;
 
+        crateSeriesList: CrateSeriesList;
+
         constructor(data: { version: string; raw: Record<string, unknown>; time: number });
 
         getItemByItemNameWithThe(name: string): SchemaItem | null;
@@ -282,8 +284,6 @@ declare namespace SchemaManager {
         getUncraftableWeaponsForTrading(): string[];
 
         checkExistance(item: Item): null | true;
-
-        getCrateSeriesList(): CrateSeriesList;
 
         updateCrateSeriesList(): void;
 
