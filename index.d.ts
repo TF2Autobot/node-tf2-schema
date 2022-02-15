@@ -283,7 +283,7 @@ declare namespace SchemaManager {
 
         getUncraftableWeaponsForTrading(): string[];
 
-        checkExistence(item: Item): null | true;
+        checkExistence(item: Item): boolean;
 
         updateCrateSeriesList(): void;
 
