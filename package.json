@@ -21,10 +21,9 @@
     "@tf2autobot/tf2-sku": "^2.0.3",
     "async": "^3.2.1",
     "events": "^3.3.0",
-    "request-retry-dayjs": "^1.1.0",
+    "request-retry-dayjs": "^1.1.1",
     "semver": "^7.3.5",
     "util": "^0.12.4",
     "vdf": "0.0.2"
-  },
-  "devDependencies": {}
+  }
 }
