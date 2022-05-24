@@ -261,7 +261,7 @@ declare namespace SchemaManager {
 
         getSkinIdByName(name: string): number | null;
 
-        getName(item: Item, proper?: boolean): string | null;
+        getName(item: Item, proper?: boolean, usePipeForSkin?: boolean): string | null;
 
         getUnusualEffects(): Effect[];
 
