@@ -174,13 +174,25 @@ declare namespace SchemaManager {
         paint?: number;
     }
 
+    export interface Qualities {
+        [qualityName: string]: number;
+    }
+
     export interface Effect {
         name: string;
         id: number;
     }
 
+    export interface ParticleEffects {
+        [name: string]: number;
+    }
+
+    export interface Paintkits {
+        [name: string]: number;
+    }
+
     export interface Paints {
-        [name: string]: string;
+        [name: string]: number;
     }
 
     export interface StrangeParts {
@@ -233,6 +245,14 @@ declare namespace SchemaManager {
 
         crateSeriesList: CrateSeriesList;
 
+        qualities: Qualities;
+
+        effects: ParticleEffects;
+
+        paintkits: Paintkits;
+
+        paints: Paints;
+
         constructor(data: { version: string; raw: Record<string, unknown>; time: number });
 
         getItemByItemNameWithThe(name: string): SchemaItem | null;
@@ -282,6 +302,8 @@ declare namespace SchemaManager {
         getCraftableWeaponsForTrading(): string[];
 
         getUncraftableWeaponsForTrading(): string[];
+
+        getPaintKits(): Paintkits;
 
         checkExistence(item: Item): boolean;
 
