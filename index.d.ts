@@ -13,7 +13,7 @@ declare class SchemaManager extends EventEmitter {
 
     _updateInterval: ReturnType<typeof setInterval>;
 
-    constructor(options: { apiKey?: string; updateTime?: number });
+    constructor(options: { apiKey?: string; updateTime?: number, lite?: boolean });
 
     init(callback: (err: any) => void): void;
 
