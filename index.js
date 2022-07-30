@@ -78,7 +78,7 @@ class TF2 {
         if (this.schema !== null) {
             this.schema.raw = data.raw;
             this.schema.time = data.time || new Date().getTime();
-            this.schema.updateCrateSeriesList();
+            this.schema.setPropertiesData();
         } else {
             this.schema = new Schema(data);
         }
