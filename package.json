@@ -1,6 +1,6 @@
 {
   "name": "@tf2autobot/tf2-schema",
-  "version": "4.3.1",
+  "version": "4.4.0",
   "description": "Get information about TF2 items, effects, skins and more, originally made by Nicklason, modified by IdiNium.",
   "main": "index.js",
   "scripts": {
