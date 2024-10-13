@@ -19,7 +19,7 @@
   "homepage": "https://github.com/TF2Autobot/node-tf2-schema#readme",
   "dependencies": {
     "@tf2autobot/tf2-sku": "^2.0.4",
-    "async": "^3.2.5",
+    "async": "^3.2.6",
     "axios": "^1.6.8",
     "events": "^3.3.0",
     "semver": "^7.6.0",
