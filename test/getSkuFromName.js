@@ -1,6 +1,5 @@
 const SchemaManager = require('../index.js');
 const readline = require('readline');
-const axios = require('axios');
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -8,13 +7,18 @@ const rl = readline.createInterface({
 });
 
 SchemaManager.prototype.getSchema = function (callback) {
-    axios
-        .get('https://schema.autobot.tf/schema')
+    fetch('https://schema.autobot.tf/schema')
         .then(response => {
-            this.setSchema(response.data, true);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(body => {
+            this.setSchema(body, true);
             callback(null, this.schema);
         })
-        .catch(function (err) {
+        .catch(err => {
             callback(err);
         });
 };
