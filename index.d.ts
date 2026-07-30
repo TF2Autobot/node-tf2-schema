@@ -259,8 +259,6 @@ declare namespace SchemaManager {
 
         getStrangifierTarget(defindex: number): number | null;
 
-        getItemByItemNameWithThe(name: string): SchemaItem | null;
-
         getSkuFromName(name: string): string;
 
         getItemObjectFromName(name: string): Item;
