@@ -255,6 +255,10 @@ declare namespace SchemaManager {
 
         constructor(data: { version: string; raw: Record<string, unknown>; time: number });
 
+        isFestivizable(defindex: number): boolean;
+
+        getStrangifierTarget(defindex: number): number | null;
+
         getItemByItemNameWithThe(name: string): SchemaItem | null;
 
         getSkuFromName(name: string): string;
