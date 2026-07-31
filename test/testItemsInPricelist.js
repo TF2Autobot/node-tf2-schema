@@ -71,5 +71,7 @@ schemaManager.init(err => {
                 }
             }
             if (success) console.log('\x1b[32m%s\x1b[0m', 'Success');
+        }).catch(err => {
+            throw err;
         });
 });
