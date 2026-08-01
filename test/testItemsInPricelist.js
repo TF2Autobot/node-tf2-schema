@@ -70,7 +70,8 @@ schemaManager.init(err => {
                     break;
                 }
             }
-            if (success) console.log('\x1b[32m%s\x1b[0m', 'Success');
+            if (success) console.log('\x1b[32m%s\x1b[0m', `Success - ${items.length} items`);
+            process.exit();
         }).catch(err => {
             throw err;
         });
