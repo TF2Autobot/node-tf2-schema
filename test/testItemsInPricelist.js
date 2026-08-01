@@ -1,6 +1,5 @@
 const SchemaManager = require('../index.js');
 const SKU = require('@tf2autobot/tf2-sku');
-const util = require('util');
 
 SchemaManager.prototype.getSchema = function (callback) {
     fetch('https://schema.autobot.tf/schema')
@@ -54,11 +53,10 @@ schemaManager.init(err => {
                 if (generateSku !== item.sku) {
                     if (item.name.includes('Haunted Cremation') && item.sku.includes(';u3130')) continue;
                     if (item.name.startsWith('Strange') && item.sku.includes(';pk')) continue;
-                    if (item.sku === '5865;6;uncraftable;c105') continue;
 
                     const itemObj = SKU.fromString(generateSku);
                     const itemObjPricedb = SKU.fromString(item.sku);
-                    if (util.isDeepStrictEqual(itemObj, itemObjPricedb)) continue;
+                    if (SKU.fromObject(itemObj) === SKU.fromObject(itemObjPricedb)) continue;
                     if (typeof itemObj.paintkit === 'number' && itemObjPricedb.defindex === 17402) continue;
                     if (typeof itemObj.crateseries === 'number' && itemObjPricedb.defindex === 5022) continue;
                     if (typeof itemObj.crateseries === 'number' && itemObj.defindex === itemObjPricedb.defindex)
