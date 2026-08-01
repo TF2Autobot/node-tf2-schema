@@ -77,10 +77,11 @@ class TF2 {
 
         if (this.schema !== null) {
             this.schema.raw = data.raw;
+            this.schema.lite = this.lite;
             this.schema.time = data.time || new Date().getTime();
             this.schema.setPropertiesData();
         } else {
-            this.schema = new Schema(data);
+            this.schema = new Schema(Object.assign({}, data, { lite: this.lite }));
         }
 
         if (fromUpdate) {
