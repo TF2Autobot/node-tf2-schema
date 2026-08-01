@@ -27,5 +27,10 @@
   },
   "engines": {
     "node": ">=22.x"
-  }
+  },
+  "files": [
+    "lib/",
+    "index.js",
+    "index.d.ts"
+  ]
 }
