@@ -36,6 +36,9 @@ schemaManager.init(err => {
         .then(items => {
             let success = true;
             for (const item of items) {
+                if (item.name.startsWith('Strange') && item.sku.includes(';pk') && item.sku.includes(';strange')) {
+                    item.name = item.name.replace('Strange', 'Strange(e)');
+                }
                 const generateSku = schemaManager.schema.getSkuFromName(item.name);
                 console.log('Generated sku:', generateSku);
 
@@ -52,7 +55,6 @@ schemaManager.init(err => {
 
                 if (generateSku !== item.sku) {
                     if (item.name.includes('Haunted Cremation') && item.sku.includes(';u3130')) continue;
-                    if (item.name.startsWith('Strange') && item.sku.includes(';pk')) continue;
 
                     const itemObj = SKU.fromString(generateSku);
                     const itemObjPricedb = SKU.fromString(item.sku);
