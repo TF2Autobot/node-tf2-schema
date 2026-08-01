@@ -18,14 +18,14 @@
   },
   "homepage": "https://github.com/TF2Autobot/node-tf2-schema#readme",
   "dependencies": {
-    "@tf2autobot/tf2-sku": "^2.0.4",
+    "@tf2autobot/tf2-sku": "^3.0.0",
     "async": "^3.2.6",
     "events": "^3.3.0",
     "semver": "^7.8.5",
     "util": "^0.12.5",
     "vdf": "0.0.2"
   },
-	"engines": {
-		"node": ">=22.x"
-	}
+  "engines": {
+    "node": ">=22.x"
+  }
 }
