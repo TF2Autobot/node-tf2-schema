@@ -75,9 +75,61 @@ class TF2 {
             return;
         }
 
+        if (this.lite) {
+            // delete unnecessary things
+            // data.raw.schema
+            // data.raw.schema.qualities;    // used
+            // data.raw.schema.qualityNames; // used
+            delete data.raw.schema.originNames;
+            // data.raw.schema.attributes;   // used
+            delete data.raw.schema.item_sets;
+            // data.raw.schema.attribute_controlled_attached_particles; // used
+            delete data.raw.schema.item_levels;
+            // data.raw.schema.kill_eater_score_types;   // used
+            delete data.raw.schema.string_lookups;       // Might needed for Spells
+            // data.raw.schema.items     - strictly necessary
+            // data.raw.schema.paintkits - strictly necessary
+
+            // items_game
+            delete data.raw.items_game.game_info;
+            delete data.raw.items_game.qualities; // duplicate of raw.schema.qualities
+            delete data.raw.items_game.colors;
+            delete data.raw.items_game.rarities;
+            delete data.raw.items_game.equip_regions_list;
+            delete data.raw.items_game.equip_conflicts;
+            delete data.raw.items_game.quest_objective_conditions;
+            delete data.raw.items_game.item_series_types;
+            delete data.raw.items_game.item_collections;
+            delete data.raw.items_game.operations;
+            // data.raw.items_game.items;    // used
+            delete data.raw.items_game.prefabs;
+            delete data.raw.items_game.attributes;   // duplicate of raw.schema.attributes
+            delete data.raw.items_game.item_criteria_templates;
+            delete data.raw.items_game.random_attribute_templates;
+            delete data.raw.items_game.lootlist_job_template_definitions;
+            delete data.raw.items_game.item_sets;
+            delete data.raw.items_game.client_loot_lists;
+            delete data.raw.items_game.revolving_loot_lists;
+            delete data.raw.items_game.recipes;
+            delete data.raw.items_game.achievement_rewards;
+            delete data.raw.items_game.attribute_controlled_attached_particles; // duplicate and not used
+            delete data.raw.items_game.armory_data;
+            delete data.raw.items_game.item_levels;
+            delete data.raw.items_game.kill_eater_score_types;   // duplicate of raw.schema.kill_eater_score_types
+            delete data.raw.items_game.mvm_maps;
+            delete data.raw.items_game.mvm_tours;
+            delete data.raw.items_game.matchmaking_categories;
+            delete data.raw.items_game.maps;
+            delete data.raw.items_game.master_maps_list;
+            delete data.raw.items_game.steam_packages;
+            // data.raw.items_game.string_lookups    // might use later for spells
+            delete data.raw.items_game.community_market_item_remaps;
+            delete data.raw.items_game.war_definitions;
+        }
+
         if (this.schema !== null) {
-            this.schema.raw = data.raw;
             this.schema.lite = this.lite;
+            this.schema.raw = data.raw;
             this.schema.time = data.time || new Date().getTime();
             this.schema.setPropertiesData();
         } else {
@@ -123,61 +175,7 @@ class TF2 {
                     items_game: result.items_game
                 };
 
-                if (this.lite) {
-                    // delete unnecessary things
-                    // schema
-                    // raw.schema.qualities;    // used
-                    // raw.schema.qualityNames; // used
-                    delete raw.schema.originNames;
-                    // raw.schema.attributes;   // used
-                    delete raw.schema.item_sets;
-                    // raw.schema.attribute_controlled_attached_particles; // used
-                    delete raw.schema.item_levels;
-                    // raw.schema.kill_eater_score_types;   // used
-                    delete raw.schema.string_lookups;       // Might needed for Spells
-                    // raw.schema.items     - strictly necessary
-                    // raw.schema.paintkits - strictly necessary
-
-                    // items_game
-                    delete raw.items_game.game_info;
-                    delete raw.items_game.qualities; // duplicate of raw.schema.qualities
-                    delete raw.items_game.colors;
-                    delete raw.items_game.rarities;
-                    delete raw.items_game.equip_regions_list;
-                    delete raw.items_game.equip_conflicts;
-                    delete raw.items_game.quest_objective_conditions;
-                    delete raw.items_game.item_series_types;
-                    delete raw.items_game.item_collections;
-                    delete raw.items_game.operations;
-                    // raw.items_game.items;    // used
-                    delete raw.items_game.prefabs;
-                    delete raw.items_game.attributes;   // duplicate of raw.schema.attributes
-                    delete raw.items_game.item_criteria_templates;
-                    delete raw.items_game.random_attribute_templates;
-                    delete raw.items_game.lootlist_job_template_definitions;
-                    delete raw.items_game.item_sets;
-                    delete raw.items_game.client_loot_lists;
-                    delete raw.items_game.revolving_loot_lists;
-                    delete raw.items_game.recipes;
-                    delete raw.items_game.achievement_rewards;
-                    delete raw.items_game.attribute_controlled_attached_particles; // duplicate and not used
-                    delete raw.items_game.armory_data;
-                    delete raw.items_game.item_levels;
-                    delete raw.items_game.kill_eater_score_types;   // duplicate of raw.schema.kill_eater_score_types
-                    delete raw.items_game.mvm_maps;
-                    delete raw.items_game.mvm_tours;
-                    delete raw.items_game.matchmaking_categories;
-                    delete raw.items_game.maps;
-                    delete raw.items_game.master_maps_list;
-                    delete raw.items_game.steam_packages;
-                    // raw.items_game.string_lookups    // might use later for spells
-                    delete raw.items_game.community_market_item_remaps;
-                    delete raw.items_game.war_definitions;
-
-                }
-
                 this.setSchema({ version: version, raw: raw }, true);
-
                 callback(null, this.schema);
             }
         );
